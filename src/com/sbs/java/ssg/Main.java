@@ -1,76 +1,23 @@
 package com.sbs.java.ssg;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("== ÇÁ·Î±×·¥ ½ÃÀÛ ==");
-
+		System.out.println("== í”„ë¡œê·¸ë¨ ì‹œì‘ ==");
+		
 		Scanner sc = new Scanner(System.in);
-
-		int lastArticleId = 0;
-
-		List<Article> articles = new ArrayList<>();
-
-		while (true) {
-			System.out.printf("¸í·É¾î) ");
-			String command = sc.nextLine();
-
-			command = command.trim();
-
-			if (command.length() == 0) {
-				continue;
-			}
-
-			if (command.equals("system exit")) {
-				break;
-			}
-			if (command.equals("article write")) {
-				int id = lastArticleId + 1;
-				lastArticleId = id;
-				System.out.printf("Á¦¸ñ : ");
-				String title = sc.nextLine();
-				System.out.printf("³»¿ë : ");
-				String body = sc.nextLine();
-
-				Article article = new Article(id, title, body);
-				articles.add(article);
-
-				System.out.printf("%d¹ø±ÛÀÌ »ı¼ºµÇ¾ú½À´Ï´Ù.\n", id);
-
-			} else if (command.equals("article list")) {
-				if (articles.size() == 0) {
-					System.out.println("°Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.");
-					continue;
-				}
-				System.out.println("¹øÈ£ | Á¦¸ñ");
-				for (int i = articles.size() - 1; i >= 0; i--) {
-					Article article = articles.get(i);
-
-					System.out.printf("%d    | %s\n", article.id, article.title);
-				}
-
-			} else {
-				System.out.printf("%s(Àº)´Â Á¸ÀçÇÏÁö ¾Ê´Â ¸í·É¾î ÀÔ´Ï´Ù.\n", command);
-			}
-		}
-
+		String command;
+		
+		System.out.printf("ëª…ë ¹ì–´) ");
+		command = sc.nextLine();
+		System.out.printf("ì…ë ¥ëœ ëª…ë ¹ì–´ : %s\n", command);
+		
+		System.out.printf("ëª…ë ¹ì–´) ");
+		int num = sc.nextInt();
+		System.out.printf("ì…ë ¥ëœ ëª…ë ¹ì–´ : %d\n", num);
 		sc.close();
-
-		System.out.println("== ÇÁ·Î±×·¥ ³¡ ==");
-	}
-}
-
-class Article {
-	int id;
-	String title;
-	String body;
-
-	public Article(int id, String title, String body) {
-		this.id = id;
-		this.title = title;
-		this.body = body;
+		
+		System.out.println("== í”„ë¡œê·¸ë¨ ë ==");
 	}
 }
