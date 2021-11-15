@@ -1,4 +1,4 @@
-package com.sbs.java.ssg;
+package com.sbs.java.ssg.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +10,5 @@ public class Util {
 		Date time = new Date();
 		
 		return format.format(time);
-		
 	}
 }
