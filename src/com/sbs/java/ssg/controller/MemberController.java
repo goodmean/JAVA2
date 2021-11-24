@@ -1,5 +1,6 @@
 package com.sbs.java.ssg.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,23 +12,24 @@ public class MemberController extends Controller {
 	private List<Member> members;
 	private String command;
 	private String actionMethodName;
-	
+
 	public void doAction(String command, String actionMethodName) {
 		this.command = command;
 		this.actionMethodName = actionMethodName;
-		
+
 		switch (actionMethodName) {
 		case "join":
 			doJoin();
 			break;
 		}
 	}
-	
-	public MemberController(Scanner sc, List<Member> members){
+
+	public MemberController(Scanner sc) {
 		this.sc = sc;
-		this.members = members;
+		
+		members = new ArrayList<Member>();
 	}
-	
+
 	private int getMemberIndexByLoginId(String loginId) {
 		int i = 0;
 		for (Member member : members) {
@@ -38,7 +40,7 @@ public class MemberController extends Controller {
 		}
 		return -1;
 	}
-	
+
 	private boolean isJoinableLoginId(String loginId) {
 		int index = getMemberIndexByLoginId(loginId);
 
@@ -49,7 +51,7 @@ public class MemberController extends Controller {
 		return false;
 	}
 
-	public void doJoin() {
+	private void doJoin() {
 		int id = members.size() + 1;
 		String regDate = Util.getNowDateStr();
 		String loginId = null;
@@ -86,7 +88,7 @@ public class MemberController extends Controller {
 		members.add(member);
 
 		System.out.printf("%d번회원이 생성되었습니다.\n", id);
-		
+
 	}
 
 }

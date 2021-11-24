@@ -16,7 +16,7 @@ public class ArticleController extends Controller {
 	public void doAction(String command, String actionMethodName) {
 		this.command = command;
 		this.actionMethodName = actionMethodName;
-		
+
 		switch (actionMethodName) {
 		case "list":
 			showList();
@@ -36,13 +36,23 @@ public class ArticleController extends Controller {
 		}
 
 	}
+	
+	public void makeTestData() {
+		System.out.println("테스트를 위한 데이터를 생성합니다.");
 
-	public ArticleController(Scanner sc, List<Article> articles) {
-		this.sc = sc;
-		this.articles = articles;
+		articles.add(new Article(1, Util.getNowDateStr(), "제목1", "내용1", 10));
+		articles.add(new Article(2, Util.getNowDateStr(), "제목2", "내용2", 11));
+		articles.add(new Article(3, Util.getNowDateStr(), "제목3", "내용3", 12));
+
 	}
 
-	public void doWrite() {
+	public ArticleController(Scanner sc) {
+		this.sc = sc;
+		
+		articles = new ArrayList<Article>();
+	}
+
+	private void doWrite() {
 		int id = articles.size() + 1;
 		String regDate = Util.getNowDateStr();
 		System.out.printf("제목 : ");
@@ -57,7 +67,7 @@ public class ArticleController extends Controller {
 
 	}
 
-	public void showList() {
+	private void showList() {
 		if (articles.size() == 0) {
 			System.out.println("게시물이 없습니다.");
 			return;
@@ -91,7 +101,7 @@ public class ArticleController extends Controller {
 
 	}
 
-	public void showDetail() {
+	private void showDetail() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
@@ -134,7 +144,7 @@ public class ArticleController extends Controller {
 		return -1;
 	}
 
-	public void doModify() {
+	private void doModify() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
@@ -165,7 +175,7 @@ public class ArticleController extends Controller {
 
 	}
 
-	public void doDelete() {
+	private void doDelete() {
 		String[] commandBits = command.split(" ");
 		int id = Integer.parseInt(commandBits[2]);
 
