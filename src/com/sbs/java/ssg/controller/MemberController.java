@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.sbs.java.ssg.container.Container;
 import com.sbs.java.ssg.dto.Article;
 import com.sbs.java.ssg.dto.Member;
 import com.sbs.java.ssg.util.Util;
@@ -14,10 +15,16 @@ public class MemberController extends Controller {
 	private String command;
 	private String actionMethodName;
 
+	public MemberController(Scanner sc) {
+		this.sc = sc;
+
+		members = Container.memberDao.members;
+	}
+
 	public void doAction(String command, String actionMethodName) {
 		this.command = command;
 		this.actionMethodName = actionMethodName;
-		
+
 		switch (actionMethodName) {
 		case "join":
 			doJoin();
@@ -33,70 +40,59 @@ public class MemberController extends Controller {
 			break;
 		}
 	}
-	
+
 	private void doLogout() {
-		if( isLogined() == false ) {
-			System.out.println("로그인 상태가 아닙니다.");
-			return;
-		}
-		
 		loginedMember = null;
 		System.out.println("로그아웃 되었습니다.");
-		
+
 	}
 
 	private void doLogin() {
-		if( isLogined() ) {
+		if (isLogined()) {
 			System.out.println("이미 로그인 상태 입니다.");
 			return;
 		}
-		
+
 		String loginId = null;
 		Member member;
-		
-		while(true) {
+
+		while (true) {
 			System.out.printf("로그인 아이디 : ");
 			loginId = sc.nextLine();
 			member = getMemberByLoginId(loginId);
-			
-			if(member == null) {
+
+			if (member == null) {
 				System.out.println("아이디를 확인해주세요.");
 				continue;
 			}
 			break;
 		}
-		
-		while(true) {
+
+		while (true) {
 			System.out.printf("로그인 비밀번호 : ");
 			String loginPw = sc.nextLine();
-			
-			if(member.loginPw.equals(loginPw) == false) {
+
+			if (member.loginPw.equals(loginPw) == false) {
 				System.out.println("비밀번호를 확인해주세요.");
 				continue;
 			}
 			break;
 		}
-		
+
 		loginedMember = member;
 		System.out.println("로그인 성공!");
-		
+
 	}
 
 	private Member getMemberByLoginId(String loginId) {
 		int index = getMemberIndexByLoginId(loginId);
-		
-		if(index == -1) {
+
+		if (index == -1) {
 			return null;
 		}
-		
-		return members.get(index);
-		
-	}
 
-	public MemberController(Scanner sc) {
-		this.sc = sc;
-		
-		members = new ArrayList<Member>();
+		return members.get(index);
+
 	}
 
 	private int getMemberIndexByLoginId(String loginId) {
@@ -159,13 +155,13 @@ public class MemberController extends Controller {
 		System.out.printf("%d번회원이 생성되었습니다.\n", id);
 
 	}
-	
+
 	public void makeTestData() {
 		System.out.println("테스트를 위한 회원 데이터를 생성합니다.");
 
 		members.add(new Member(1, Util.getNowDateStr(), "admin", "admin", "관리자"));
-		members.add(new Member(2, Util.getNowDateStr(), "user1", "user1", "유저1"));
-		members.add(new Member(3, Util.getNowDateStr(), "user2", "user2", "유저2"));
+		members.add(new Member(2, Util.getNowDateStr(), "user1", "user1", "홍길동"));
+		members.add(new Member(3, Util.getNowDateStr(), "user2", "user2", "홍길순"));
 
 	}
 
