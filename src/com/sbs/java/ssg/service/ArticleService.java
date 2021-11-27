@@ -14,15 +14,15 @@ public class ArticleService {
 	}
 	
 	public List<Article> getForPrintArticles(String searchKeyword) {
-		return Container.articleDao.getArticles();
+		return articleDao.getArticles();
 	}
 
 	public int getArticleIndexById(int id) {
-		return Container.articleDao.getArticleIndexById(id);
+		return articleDao.getArticleIndexById(id);
 	}
 
 	public Article getArticleById(int id) {
-		return Container.articleDao.getArticleById(id);
+		return articleDao.getArticleById(id);
 	}
 
 	public void remove(Article foundArticle) {
