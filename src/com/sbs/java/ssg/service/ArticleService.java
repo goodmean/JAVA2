@@ -29,4 +29,8 @@ public class ArticleService {
 		articleDao.remove(foundArticle);
 		
 	}
+
+	public List<Article> getForPrintArticles() {
+		return articleDao.getArticles(null);
+	}
 }

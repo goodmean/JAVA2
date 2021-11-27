@@ -24,6 +24,10 @@ public class MemberService {
 		memberDao.add(member);
 	}
 
+	public String getMemberNameById(int memberId) {
+		return memberDao.getMemberNameById(memberId);
+	}
+
 	
 	
 }
